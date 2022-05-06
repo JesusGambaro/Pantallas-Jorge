@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700;900&display=swap");
+:root {
+  --mdb-body-font-size: #{inspect(13px)};
+}
+#container {
+  color: #8190a5;
+  font-family: "Lato", sans-serif;
+  background-image: url("./Images/st_back_login-01.jpg");
+  //height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.form-outline .form-control ~ .form-label {
+  color: #8190a5;
+}
+.caret-off::before {
+  display: none;
+}
+.caret-off::after {
+  display: none;
+}
+.actived {
+  background: #00a6ff;
+  color: white;
+}
+.btn {
+  text-transform: none;
+}
+.navbar-nav {
+  color: #47525e;
+  font-size: 1rem;
+}
+.btn-primary {
+  background: var(--light);
+  color: #47525e;
+  font-size: 1rem;
+  &:focus,
+  &:hover {
+    background: #00a6ff;
+  }
+}
+.btn-warning {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 10%;
+}
+.dropdown-menu [data-active="true"] a.dropdown-item,
+.dropdown-menu .dropdown-item:focus,
+.dropdown-menu li:focus .dropdown-item {
+  background: #00a6ff;
+  color: white;
+}
+@media (max-width: 768px) {
+  .w-md-100 {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.btn-group {
+  .list-btns {
+    background: rgba(0, 166, 255, 0.22);
+    position: relative;
+  }
+}
+.btn-dark {
+  background: #00a6ff;
+}
+table * {
+  text-align: center;
+}
