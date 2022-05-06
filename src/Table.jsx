@@ -1,3 +1,5 @@
+import axios from "axios";
+import {useState, useEffect} from "react";
 import {
   MDBBtn,
   MDBBtnGroup,
@@ -22,10 +24,20 @@ import {
   MDBTableHead,
   MDBTypography,
 } from "mdb-react-ui-kit";
-import { useState } from "react";
 
-const Table = () => {
+const Table = ({section}) => {
+  console.log(section);
   const [open, setOpen] = useState(false);
+  const [simulators, setSimulators] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const {data} = await axios.get(
+        `https://prueba-tecnica-be.herokuapp.com/simulators/${section}`
+      );
+      setSimulators(data);
+      console.log(data);
+    })();
+  }, []);
   return (
     <MDBContainer fluid className="p-0 m-0 min-vh-100">
       <MDBNavbar
@@ -33,10 +45,10 @@ const Table = () => {
         light
         bgColor="light"
         className="p-0 shadow-0 border-bottom"
-        style={{ height: "4rem" }}
+        style={{height: "4rem"}}
       >
         <MDBContainer fluid className="m-0 p-0 h-100">
-          <MDBNavbarBrand className="ms-4">
+          <MDBNavbarBrand className="ms-4" href="/">
             <img
               src="./Images/ST_SMS_LOGO-01.png"
               alt="logo"
@@ -67,25 +79,25 @@ const Table = () => {
                   </MDBDropdownToggle>
                   <MDBDropdownMenu
                     className="dropdown square rounded-0 w-md-100 mt-2 "
-                    style={{ border: ".1rem solid #00a6ff" }}
+                    style={{border: ".1rem solid #00a6ff"}}
                   >
                     <MDBDropdownItem
                       className="square rounded-0"
-                      style={{ textTransform: "none" }}
+                      style={{textTransform: "none"}}
                     >
                       <MDBDropdownLink
                         className="square rounded-0 w-md-100"
-                        href="#"
+                        href="/VRs"
                       >
-                        Another action
+                        VRs
                       </MDBDropdownLink>
                     </MDBDropdownItem>
                     <MDBDropdownItem>
                       <MDBDropdownLink
                         className="square rounded-0 w-md-100"
-                        href="#"
+                        href="/WEB360"
                       >
-                        Another action
+                        WEB 360
                       </MDBDropdownLink>
                     </MDBDropdownItem>
                   </MDBDropdownMenu>
@@ -93,7 +105,7 @@ const Table = () => {
               </MDBNavbarItem>
               <MDBNavbarItem
                 className="h-100 square rounded-0 mx-4"
-                style={{ color: "white" }}
+                style={{color: "white"}}
               >
                 <MDBNavbarLink
                   href="#"
@@ -122,7 +134,7 @@ const Table = () => {
             <MDBBtn
               color="warning"
               className="p-1 py-2 me-3 shadow-0"
-              href="/home"
+              href="/"
             >
               Cerrar sesion
               <MDBIcon fas icon="sign-out-alt" className="fs-5" />
@@ -151,13 +163,21 @@ const Table = () => {
       <MDBContainer
         fluid
         className="px-4 mt-4"
-        style={{ border: ".0rem solid red" }}
+        style={{border: ".0rem solid red"}}
       >
         <MDBTypography variant="h3" className="d-flex align-items-center">
-          <img src="./Images/Raster.png" height={30} className="me-3" />
-          Simuladores VRs
+          <img
+            src={`./Images/${
+              section === "vr"
+                ? "Raster.png"
+                : "dc2f796f667045a889d242b9f1f17218.png"
+            }`}
+            height={30}
+            className="me-3"
+          />
+          Simuladores {section === "vr" ? "VRs" : "WEB 360"}
         </MDBTypography>
-        <MDBTable responsive style={{ border: ".1rem solid #C0CCDA" }}>
+        <MDBTable responsive style={{border: ".1rem solid #C0CCDA"}}>
           <MDBTableHead light>
             <tr>
               <th>ID</th>
@@ -167,85 +187,61 @@ const Table = () => {
               <th>Alumnos conectados</th>
               <th>% Avance</th>
               <th>Estado</th>
-              <th>Batería</th>
+              {section === "vr" && <th>Batería</th>}
               <th>Acciones</th>
             </tr>
           </MDBTableHead>
           <MDBTableBody>
-            <tr scope="col">
-              <th scope="row">1</th>
-              <td>Química industrial</td>
-              <td>Simulador 360</td>
-              <td>v.1.0.8</td>
-              <td>29</td>
-              <td>60/100(60%)</td>
-              <td>OFF</td>
-              <td>30%</td>
-              <td>
-                <MDBBtn className="shadow-0 m-0" color="dark" size="sm">
-                  Mensaje Emergente Masivo
-                </MDBBtn>
-                <MDBBtn outline className="mx-2" color="dark" size="sm">
-                  Gameplay
-                </MDBBtn>
-                <MDBBtn className="shadow-0 ms-2" color="dark" size="sm">
-                  Reporte
-                </MDBBtn>
-                <MDBBtn
-                  floating
-                  tag="a"
-                  color="dark"
-                  className="shadow-0 ms-lg-2"
-                  size="sm"
-                >
-                  <MDBIcon fas icon="plus" />
-                </MDBBtn>
-              </td>
-            </tr>
-            <tr scope="col" className="table-light">
-              <th scope="row">2</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr scope="col">
-              <th scope="row">3</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr scope="col" className="table-light">
-              <th scope="row">4</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr scope="col">
-              <th scope="row">5</th>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+            {simulators.length &&
+              simulators.map((sim, i) => {
+                return (
+                  <tr scope="col" className="table-light">
+                    <th scope="row">{i + 1}</th>
+                    <td>{sim.curso}</td>
+                    <td>{sim.nombre}</td>
+                    <td>{sim.version}</td>
+                    <td>{sim.alumnosCon}</td>
+                    <td>{sim.avance}</td>
+                    <td>{sim.alumnosCon}</td>
+                    {section === "vr" && (
+                    <td>{sim.bateria}</td>
+                    )}
+                    <td>
+                        <MDBBtn
+                          className="shadow-0 m-0 mb-md-1"
+                          color="dark"
+                          size="sm"
+                        >
+                          Mensaje Emergente Masivo
+                        </MDBBtn>
+                        <MDBBtn
+                          outline
+                          className="mx-2  mb-md-1"
+                          color="dark"
+                          size="sm"
+                        >
+                          Gameplay
+                        </MDBBtn>
+                        <MDBBtn
+                          className="shadow-0 ms-2"
+                          color="dark"
+                          size="sm"
+                        >
+                          Reporte
+                        </MDBBtn>
+                        <MDBBtn
+                          floating
+                          tag="a"
+                          color="dark"
+                          className="shadow-0 ms-lg-2 mt-md-1"
+                          size="sm"
+                        >
+                          <MDBIcon fas icon="plus" />
+                        </MDBBtn>
+                      </td>
+                  </tr>
+                );
+              })}
           </MDBTableBody>
         </MDBTable>
       </MDBContainer>

@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./Home";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Home from "./Login";
 import Table from "./Table";
 
 function App() {
@@ -7,7 +7,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/table" element={<Table />} />
+        <Route path="/VRs" element={<Table section="vr" />} />
+        <Route path="/WEB360" element={<Table section="web360" />} />
       </Routes>
     </BrowserRouter>
   );
